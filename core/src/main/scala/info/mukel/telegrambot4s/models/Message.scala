@@ -95,4 +95,3 @@ case class  Message(
   @deprecated("Use .source instead", "telegrambo4s 2.0.1")
   def sender = source
 }
-

@@ -41,6 +41,8 @@ trait Commands extends Messages with BotExecutionContext {
     val toCommandImpl = implicitly[ToCommand[T]]
     val variants = commands.map(toCommandImpl.apply)
 
+    logger.info("onCommand: variants: '{}'", variants.mkString("|"))
+
     require(variants.forall(_.forall(c => !c.isWhitespace)),
       "Commands cannot contain whitespace")
 
