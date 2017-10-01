@@ -1,0 +1,1 @@
+sbt "project examples" "run YourBot YourToken"
