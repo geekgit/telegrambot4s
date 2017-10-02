@@ -21,14 +21,14 @@ import scala.concurrent.duration.Duration
   * The provided clientId/secret are not guaranteed to work forever.
   * See [[https://developer.spotify.com/web-api/authorization-guide/]]
   */
-class SpotifyBot(token: String) extends ExampleBot(token) with Polling {
+class SpotifyBot(token: String, spotify_clientId: String = "YourClientID", spotify_secretId: String = "YourSecretID") extends ExampleBot(token) with Polling {
 
   val limit = 10
 
   val accessToken = {
 
-    val clientId = "e74c52988f6d4bcebb36970a423d348d"
-    val secret = "0edc87deae1a4611a97b6cebef262136"
+    val clientId = spotify_clientId
+    val secret = spotify_secretId
 
     val authRequest = HttpRequest(
       HttpMethods.POST,
