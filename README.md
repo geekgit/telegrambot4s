@@ -68,7 +68,7 @@ Table of contents
 ## Quick-start
 Add to your `build.sbt` file:
 ```scala
-libraryDependencies += "info.mukel" %% "telegrambot4s" % "3.0.12"
+libraryDependencies += "info.mukel" %% "telegrambot4s" % "3.0.14"
 ```
 
 ## Leaking bot tokens
@@ -263,7 +263,7 @@ This library uses [Semantic Versioning](http://semver.org/). For the versions av
 
 _Looking for maintainers!_
 
-See also the list of [awesome contributors](https://github.com/your/project/contributors) who participated in this project.
+See also the list of [awesome contributors](https://github.com/mukel/telegrambot4s/contributors) who participated in this project.
 Contributions are very welcome, documentation improvements/corrections, bug reports, even feature requests.
 
 ## License

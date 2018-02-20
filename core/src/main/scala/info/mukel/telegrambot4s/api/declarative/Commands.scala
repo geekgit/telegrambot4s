@@ -13,8 +13,12 @@ import scala.concurrent.duration._
   */
 trait Commands extends Messages with BotExecutionContext {
 
-  private lazy val botName: String =
-    Await.result(request(GetMe).map(_.firstName), 10.seconds)
+  private lazy val botUsername: String =
+    Await.result(request(GetMe).map(_.username match {
+      case Some(username) => username
+        //This case is not possible, since any bot must have a defined unique username.
+      case None => throw new RuntimeException("The current bot does not have a defined username")
+    }), 10.seconds)
 
   /**
     * By default the @receiver suffix in commands is respected.
@@ -45,17 +49,16 @@ trait Commands extends Messages with BotExecutionContext {
       "Commands cannot contain whitespace")
 
     onMessage { implicit msg =>
-      using(textTokens) { tokens =>
-        val cmd = tokens.head
-        // Filter only commands
-        if (cmd.startsWith(ToCommand.CommandPrefix)) {
-          val target = ToCommand.cleanCommand(cmd)
-          val optReceiver = ToCommand.getReceiver(cmd)
-          val matchReceiver = ignoreCommandReceiver || 
-            optReceiver.forall(_.equalsIgnoreCase(botName))
+      using(rawCommand) { rawCmd =>
+        val optReceiver = ToCommand.getReceiver(rawCmd)
+        val matchReceiver = ignoreCommandReceiver ||
+          optReceiver.forall(_.equalsIgnoreCase(botUsername))
 
-          if (matchReceiver && variants.contains(target))
-            action(msg)
+        if (matchReceiver) {
+          using(command) { cmd =>
+            if (variants.contains(cmd))
+              action(msg)
+          }
         }
       }
     }

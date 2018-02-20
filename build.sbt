@@ -43,6 +43,7 @@ lazy val tests: Project =
         library.scalaTest,
         library.scalaMock,
         library.akkaHttp,
+        library.akkaHttpTestkit,
         library.logback,
         library.scalaLogging
       ).map(_ % Test)
@@ -82,7 +83,7 @@ lazy val examples: Project =
       val akkaVersion  = "2.4.19"
       val akkaActor    = akkaVersion
       val akkaStream   = akkaVersion
-      val akkaHttp     = "10.0.9"
+      val akkaHttp     = "10.0.10"
       val json4s       = "3.5.3"
       val scalaTest    = "3.0.3"
       val scalajHttp   = "2.3.0"
@@ -93,6 +94,8 @@ lazy val examples: Project =
     }
 
     val akkaHttp        = "com.typesafe.akka"           %% "akka-http"            % Version.akkaHttp
+    val akkaHttpTestkit = "com.typesafe.akka"           %% "akka-http-testkit"    % Version.akkaHttp
+
     val akkaActor       = "com.typesafe.akka"           %% "akka-actor"           % Version.akkaActor
     val akkaStream      = "com.typesafe.akka"           %% "akka-stream"          % Version.akkaStream
     val json4sCore      = "org.json4s"                  %% "json4s-core"          % Version.json4s
